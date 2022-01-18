@@ -4,10 +4,12 @@ let hours = ['6am', '7am', '8am','9am', '10am', '11am','12pm', '1pm', '2am','3pm
 
 //1st step: Grab your window into the DOM, using the getElementById method. See line #77 in code
 
+// feeding the DOM id profiles, cookieSales variable is assigned to that
 let cookieSales = document.getElementById('cookie-sales');
 
 console.log(cookieSales);
 
+//declaring a variable an object,
 let seattle = {
   city: 'Seattle',
   cust: [],
@@ -18,11 +20,13 @@ let seattle = {
   totalCookies: 0,
   getCust: function () {
     for(let i = 0; i < hours.length; i++){
+      // this is more dynamic and can use the variable which you can be renamed
       this.cust.push(randomCust(this.minCust,this.maxCust));
+      //
     }
   },
   calcCookie: function () {
-    this.getCust();
+    this.getCust(); // <-- this is a method call
     for(let i = 0; i < hours.length; i++){
       let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
       this.cookieArr.push(cookieBatch);
@@ -131,7 +135,8 @@ function randomCust(min, max) {
   let number = Math.floor(Math.random() * (max - min + 1) + min);
   return number;
 }
-
+// let allows flexibility
+// const, once declared you cannot change
 const cities = [seattle, tokyo, dubai, paris, lima];
 
 // getAllCustomers();
@@ -161,11 +166,13 @@ function renderCookies(store) {
   const articleElem = document.createElement('article');
   cookieSales.appendChild(articleElem);
 
+  // cookieSales is our window into the DOM
+
   //create h2 element, give it context
   // and append it to the article element
-  const h2Elem = document.createElement('h2');
-  h2Elem.textContent = store.city;
-  articleElem.appendChild(h2Elem);
+  const h1Elem = document.createElement('h1');
+  h1Elem.textContent = store.city;
+  articleElem.appendChild(h1Elem);
 
   // const pElem = document.createElement('p');
   // pElem.textContent = '${cookie.name} is selling ${cookies.total}';
