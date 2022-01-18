@@ -1,0 +1,13 @@
+ul {
+  list-style-type: square;
+  list-style-position: inside;
+  margin-left: 50px;
+}
+
+h1 {
+  margin-left: 50px;
+  font-size: larger;
+  font-weight: bolder;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
