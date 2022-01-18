@@ -11,7 +11,7 @@ const cities = [];
 
 console.log(cookieSales);
 
-function cookieCity(city, avgCookie, minCust, maxCust){
+function CookieCity(city, avgCookie, minCust, maxCust){
   this.city = city;
   this.cust = [];
   this.avgCookie = avgCookie,
@@ -19,16 +19,18 @@ function cookieCity(city, avgCookie, minCust, maxCust){
   this.minCust = minCust;
   this.maxCust = maxCust;
   this.totalCookies = null;
+
+  cities.push(this);
 }
 
-cookieCity.prototype.getCust = function () {
+CookieCity.prototype.getCust = function () {
   for(let i = 0; i < hours.length; i++){
     // this is more dynamic and can use the variable which you can be renamed
     this.cust.push(randomCust(this.minCust,this.maxCust));
   }
 },
 
-cookieCity.prototype.calcCookie = function () {
+CookieCity.prototype.calcCookie = function () {
   this.getCust(); // <-- this is a method call
   for(let i = 0; i < hours.length; i++){
     let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
@@ -37,8 +39,11 @@ cookieCity.prototype.calcCookie = function () {
   }
 }
 
-let seattle = new cookieCity('Seattle', )
-
+let seattle = new CookieCity('Seattle', 6.3, 23, 65);
+let tokyo = new CookieCity('Tokyo', 1.2, 3, 24);
+let dubai = new CookieCity('Dubai', 3.7, 11, 38);
+let paris = new CookieCity('Paris', 2.3, 20, 38);
+let lima = new CookieCity('Lima', 4.6, 2, 16);
 //declaring a variable an object,
 // let seattle = {
 //   city: 'Seattle',
@@ -69,97 +74,97 @@ let seattle = new cookieCity('Seattle', )
 
 console.log(seattle);
 
-let tokyo = {
-  city: 'Tokyo',
-  cust: [],
-  avgCookie: 1.2,
-  cookieArr: [],
-  minCust: 3,
-  maxCust: 24,
-  totalCookies: 0,
-  getCust: function () {
-    for(let i = 0; i < hours.length; i++){
-      this.cust.push(randomCust(this.minCust,this.maxCust));
-    }
-  },
-  calcCookie: function () {
-    this.getCust();
-    for(let i = 0; i < hours.length; i++){
-      let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
-      this.cookieArr.push(cookieBatch);
-      this.totalCookies = this.totalCookies + cookieBatch;
-    }
-  }
-};
+// let tokyo = {
+//   city: 'Tokyo',
+//   cust: [],
+//   avgCookie: 1.2,
+//   cookieArr: [],
+//   minCust: 3,
+//   maxCust: 24,
+//   totalCookies: 0,
+//   getCust: function () {
+//     for(let i = 0; i < hours.length; i++){
+//       this.cust.push(randomCust(this.minCust,this.maxCust));
+//     }
+//   },
+//   calcCookie: function () {
+//     this.getCust();
+//     for(let i = 0; i < hours.length; i++){
+//       let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+//       this.cookieArr.push(cookieBatch);
+//       this.totalCookies = this.totalCookies + cookieBatch;
+//     }
+//   }
+// };
 
-let dubai = {
-  city: 'Dubai',
-  cust: [],
-  avgCookie: 3.7,
-  cookieArr: [],
-  minCust: 11,
-  maxCust: 38,
-  totalCookies: 0,
-  getCust: function () {
-    for(let i = 0; i < hours.length; i++){
-      this.cust.push(randomCust(this.minCust,this.maxCust));
-    }
-  },
-  calcCookie: function () {
-    this.getCust();
-    for(let i = 0; i < hours.length; i++){
-      let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
-      this.cookieArr.push(cookieBatch);
-      this.totalCookies = this.totalCookies + cookieBatch;
-    }
-  }
-};
+// let dubai = {
+//   city: 'Dubai',
+//   cust: [],
+//   avgCookie: 3.7,
+//   cookieArr: [],
+//   minCust: 11,
+//   maxCust: 38,
+//   totalCookies: 0,
+//   getCust: function () {
+//     for(let i = 0; i < hours.length; i++){
+//       this.cust.push(randomCust(this.minCust,this.maxCust));
+//     }
+//   },
+//   calcCookie: function () {
+//     this.getCust();
+//     for(let i = 0; i < hours.length; i++){
+//       let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+//       this.cookieArr.push(cookieBatch);
+//       this.totalCookies = this.totalCookies + cookieBatch;
+//     }
+//   }
+// };
 
-let paris = {
-  city: 'Paris',
-  cust: [],
-  avgCookie: 2.3,
-  cookieArr: [],
-  minCust: 20,
-  maxCust: 38,
-  totalCookies: 0,
-  getCust: function () {
-    for(let i = 0; i < hours.length; i++){
-      this.cust.push(randomCust(this.minCust,this.maxCust));
-    }
-  },
-  calcCookie: function () {
-    this.getCust();
-    for(let i = 0; i < hours.length; i++){
-      let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
-      this.cookieArr.push(cookieBatch);
-      this.totalCookies = this.totalCookies + cookieBatch;
-    }
-  }
-};
+// let paris = {
+//   city: 'Paris',
+//   cust: [],
+//   avgCookie: 2.3,
+//   cookieArr: [],
+//   minCust: 20,
+//   maxCust: 38,
+//   totalCookies: 0,
+//   getCust: function () {
+//     for(let i = 0; i < hours.length; i++){
+//       this.cust.push(randomCust(this.minCust,this.maxCust));
+//     }
+//   },
+//   calcCookie: function () {
+//     this.getCust();
+//     for(let i = 0; i < hours.length; i++){
+//       let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+//       this.cookieArr.push(cookieBatch);
+//       this.totalCookies = this.totalCookies + cookieBatch;
+//     }
+//   }
+// };
 
-let lima = {
-  city: 'Lima',
-  cust: [],
-  avgCookie: 4.6,
-  cookieArr: [],
-  minCust: 2,
-  maxCust: 16,
-  totalCookies: 0,
-  getCust: function () {
-    for(let i = 0; i < hours.length; i++){
-      this.cust.push(randomCust(this.minCust,this.maxCust));
-    }
-  },
-  calcCookie: function () {
-    this.getCust();
-    for(let i = 0; i < hours.length; i++){
-      let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
-      this.cookieArr.push(cookieBatch);
-      this.totalCookies = this.totalCookies + cookieBatch;
-    }
-  }
-};
+// let lima = {
+//   city: 'Lima',
+//   cust: [],
+//   avgCookie: 4.6,
+//   cookieArr: [],
+//   minCust: 2,
+//   maxCust: 16,
+//   totalCookies: 0,
+//   getCust: function () {
+//     for(let i = 0; i < hours.length; i++){
+//       this.cust.push(randomCust(this.minCust,this.maxCust));
+//     }
+//   },
+//   calcCookie: function () {
+//     this.getCust();
+//     for(let i = 0; i < hours.length; i++){
+//       let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+//       this.cookieArr.push(cookieBatch);
+//       this.totalCookies = this.totalCookies + cookieBatch;
+//     }
+//   }
+// };
 
 function randomCust(min, max) {
   let number = Math.floor(Math.random() * (max - min + 1) + min);
