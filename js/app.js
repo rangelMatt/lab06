@@ -6,34 +6,64 @@ let hours = ['6am', '7am', '8am','9am', '10am', '11am','12pm', '1pm', '2am','3pm
 
 // feeding the DOM id profiles, cookieSales variable is assigned to that
 let cookieSales = document.getElementById('cookie-sales');
+// adding all my city objects to an array for easy storage and use in helper functions
+const cities = [];
 
 console.log(cookieSales);
 
-//declaring a variable an object,
-let seattle = {
-  city: 'Seattle',
-  cust: [],
-  avgCookie: 6.3,
-  cookieArr: [],
-  minCust: 23,
-  maxCust: 65,
-  totalCookies: 0,
-  getCust: function () {
-    for(let i = 0; i < hours.length; i++){
-      // this is more dynamic and can use the variable which you can be renamed
-      this.cust.push(randomCust(this.minCust,this.maxCust));
-      //
-    }
-  },
-  calcCookie: function () {
-    this.getCust(); // <-- this is a method call
-    for(let i = 0; i < hours.length; i++){
-      let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
-      this.cookieArr.push(cookieBatch);
-      this.totalCookies = this.totalCookies + cookieBatch;
-    }
+function cookieCity(city, avgCookie, minCust, maxCust){
+  this.city = city;
+  this.cust = [];
+  this.avgCookie = avgCookie,
+  this.cookieArr = [];
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.totalCookies = null;
+}
+
+cookieCity.prototype.getCust = function () {
+  for(let i = 0; i < hours.length; i++){
+    // this is more dynamic and can use the variable which you can be renamed
+    this.cust.push(randomCust(this.minCust,this.maxCust));
   }
-};
+},
+
+cookieCity.prototype.calcCookie = function () {
+  this.getCust(); // <-- this is a method call
+  for(let i = 0; i < hours.length; i++){
+    let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+    this.cookieArr.push(cookieBatch);
+    this.totalCookies = this.totalCookies + cookieBatch;
+  }
+}
+
+let seattle = new cookieCity('Seattle', )
+
+//declaring a variable an object,
+// let seattle = {
+//   city: 'Seattle',
+//   cust: [],
+//   avgCookie: 6.3,
+//   cookieArr: [],
+//   minCust: 23,
+//   maxCust: 65,
+//   totalCookies: 0,
+//   getCust: function () {
+//     for(let i = 0; i < hours.length; i++){
+//       // this is more dynamic and can use the variable which you can be renamed
+//       this.cust.push(randomCust(this.minCust,this.maxCust));
+//       //
+//     }
+//   },
+//   calcCookie: function () {
+//     this.getCust(); // <-- this is a method call
+//     for(let i = 0; i < hours.length; i++){
+//       let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+//       this.cookieArr.push(cookieBatch);
+//       this.totalCookies = this.totalCookies + cookieBatch;
+//     }
+//   }
+// };
 // seattle.getCust();
 // seattle.calcCookie();
 
@@ -137,7 +167,7 @@ function randomCust(min, max) {
 }
 // let allows flexibility
 // const, once declared you cannot change
-const cities = [seattle, tokyo, dubai, paris, lima];
+
 
 // getAllCustomers();
 console.log(cities);
