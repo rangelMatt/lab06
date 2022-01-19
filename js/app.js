@@ -1,6 +1,6 @@
 'use strict';
 
-let hours = ['6am', '7am', '8am','9am', '10am', '11am','12pm', '1pm', '2am','3pm','4pm', '5pm', '6pm','7pm'];
+let hours = ['6:00am', '7:00am', '8:00am','9:00am', '10:00am', '11:00am','12:00pm', '1:00pm', '2:00am','3:00pm','4:00pm', '5:00pm', '6:00pm','7:00pm'];
 
 //1st step: Grab your window into the DOM, using the getElementById method. See line #77 in code
 
@@ -195,54 +195,72 @@ function randomCust(min, max) {
 //        </ul>
 //        <img>
 //      </article> -->
+function createHeader(){
+  const tableElem = document.createElement('table');
+  cookieSales.appendChild(tableElem);
+
+  // // // body and rows
+  const tableHeadElem = document.createElement('thead');
+  tableElem.appendChild(tableHeadElem);
+  const row = document.createElement('tr');
+  tableHeadElem.appendChild(row);
+
+  const emptyFirstRow = document.createElement('th');
+  emptyFirstRow.textContent = '';
+  row.appendChild(emptyFirstRow);
+
+  for (let i = 0; i < hours.length; i++){
+    const th1Elem = document.createElement('th');
+    th1Elem.textContent = hours[i];
+    row.appendChild(th1Elem);
+  }
+  
+ 
+
+}
+createHeader();
 
 CookieCity.prototype.renderCookies = function() {
 
   // create an article element, it doesn't need context but append it to our DOM window, cookieSales
-  const articleElem = document.createElement('article');
-  cookieSales.appendChild(articleElem);
+  const table = document.querySelector('table');
 
+  //******** DOM TABLE RENDER ************
+
+  const row1 = document.createElement('tr');
+  table.appendChild(row1);
+  // for(let i = 0; i< hours.length; i++){
+  //   const th2Elem = document.createElement('td');
+  //   th2Elem.textContent = `${hours[i]}`;
+  //   row1.appendChild(th2Elem);
+  // }
   // cookieSales is our window into the DOM
 
   //create h2 element, give it context
   // and append it to the article element
-  const h1Elem = document.createElement('h1');
-  h1Elem.textContent = this.city;
-  articleElem.appendChild(h1Elem);
+  const th4Elem = document.createElement('th');
+  th4Elem.textContent = this.city;
+  row1.appendChild(th4Elem);
 
   // const pElem = document.createElement('p');
   // pElem.textContent = '${cookie.name} is selling ${cookies.total}';
   // // to do: create a function with total cookies??
   // articleElem.appendChild(pElem);
 
-  //******** DOM TABLE RENDER ************
 
-  // const tableElem = document.createElement('table');
-  // articleElem.appendChild(ulElem);
-
-  // // body and rows
-  // const tableHeadElem = document.createElement('table');
-  // tableElem.appendChild(tableHeadElem);
-
-  // const row1 = document.createElement('tr');
-  // tableHeadElem.appendChild(row1)
-
-  const ulElem = document.createElement('ul');
-  articleElem.appendChild(ulElem);
-
-  // loop through the hours array to create lis
+  // loop through the hours array to create list
   for(let i = 0; i < hours.length; i++){
     // 6am: 16 cookies
 
-    const liElem = document.createElement('li');
-    liElem.textContent = `${hours[i]}: ${this.cookieArr[i]} cookies`;
-    ulElem.appendChild(liElem);
+    const th3Elem = document.createElement('th');
+    th3Elem.textContent = `${this.cookieArr[i]}`;
+    row1.appendChild(th3Elem);
   }
-  const liElem = document.createElement('li');
-  liElem.textContent = `Total: ${this.totalCookies} cookies`;
-  ulElem.appendChild(liElem);
-  console.log(this.totalCookies, 'this is total');
+  const th5Elem = document.createElement('th');
+  th5Elem.textContent = `${this.totalCookies} cookies`;
+  row1.appendChild(th5Elem);
 };
+
 // for loop through cities
 function renderAllCities() {
   for (let i = 0; i < cities.length; i++){
