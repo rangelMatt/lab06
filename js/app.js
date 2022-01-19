@@ -18,7 +18,7 @@ function CookieCity(city, avgCookie, minCust, maxCust){
   this.cookieArr = [];
   this.minCust = minCust;
   this.maxCust = maxCust;
-  this.totalCookies = null;
+  this.totalCookies = 0;
 
   cities.push(this);
 }
@@ -34,10 +34,11 @@ CookieCity.prototype.calcCookie = function () {
   this.getCust(); // <-- this is a method call
   for(let i = 0; i < hours.length; i++){
     let cookieBatch = Math.ceil(this.avgCookie * this.cust[i]);
+    // console.log('cookie batch var',cookieBatch);
     this.cookieArr.push(cookieBatch);
     this.totalCookies = this.totalCookies + cookieBatch;
   }
-}
+};
 
 let seattle = new CookieCity('Seattle', 6.3, 23, 65);
 let tokyo = new CookieCity('Tokyo', 1.2, 3, 24);
@@ -175,7 +176,7 @@ function randomCust(min, max) {
 
 
 // getAllCustomers();
-console.log(cities);
+// console.log(cities);
 // ************** DOM Manipulation ***********************
 
 // STEPS:
@@ -195,8 +196,8 @@ console.log(cities);
 //        <img>
 //      </article> -->
 
-function renderCookies(store) {
-  store.calcCookie();
+CookieCity.prototype.renderCookies = function() {
+
   // create an article element, it doesn't need context but append it to our DOM window, cookieSales
   const articleElem = document.createElement('article');
   cookieSales.appendChild(articleElem);
@@ -206,13 +207,25 @@ function renderCookies(store) {
   //create h2 element, give it context
   // and append it to the article element
   const h1Elem = document.createElement('h1');
-  h1Elem.textContent = store.city;
+  h1Elem.textContent = this.city;
   articleElem.appendChild(h1Elem);
 
   // const pElem = document.createElement('p');
   // pElem.textContent = '${cookie.name} is selling ${cookies.total}';
   // // to do: create a function with total cookies??
   // articleElem.appendChild(pElem);
+
+  //******** DOM TABLE RENDER ************
+
+  // const tableElem = document.createElement('table');
+  // articleElem.appendChild(ulElem);
+
+  // // body and rows
+  // const tableHeadElem = document.createElement('table');
+  // tableElem.appendChild(tableHeadElem);
+
+  // const row1 = document.createElement('tr');
+  // tableHeadElem.appendChild(row1)
 
   const ulElem = document.createElement('ul');
   articleElem.appendChild(ulElem);
@@ -222,18 +235,20 @@ function renderCookies(store) {
     // 6am: 16 cookies
 
     const liElem = document.createElement('li');
-    liElem.textContent = `${hours[i]}: ${store.cookieArr[i]} cookies`;
+    liElem.textContent = `${hours[i]}: ${this.cookieArr[i]} cookies`;
     ulElem.appendChild(liElem);
   }
   const liElem = document.createElement('li');
-  liElem.textContent = `Total: ${store.totalCookies} cookies`;
+  liElem.textContent = `Total: ${this.totalCookies} cookies`;
   ulElem.appendChild(liElem);
-}
+  console.log(this.totalCookies, 'this is total');
+};
 // for loop through cities
 function renderAllCities() {
   for (let i = 0; i < cities.length; i++){
     let currentCity = cities[i];
-    renderCookies(currentCity);
+    currentCity.calcCookie();
+    currentCity.renderCookies();
   }
 }
 
