@@ -5,12 +5,12 @@ let hours = ['6:00am', '7:00am', '8:00am','9:00am', '10:00am', '11:00am','12:00p
 //1st step: Grab your window into the DOM, using the getElementById method. See line #77 in code
 
 // feeding the DOM id profiles, cookieSales variable is assigned to that
-let cookieSales = document.getElementById('cookie-sales');
+let cookieSection = document.getElementById('cookie-sales');
 // adding all my city objects to an array for easy storage and use in helper functions
 const cities = [];
 
-console.log(cookieSales);
-
+// console.log(cookieSection);// 'this' refers to the object that will be created.
+// this
 function CookieCity(city, avgCookie, minCust, maxCust){
   this.city = city;
   this.cust = [];
@@ -20,16 +20,16 @@ function CookieCity(city, avgCookie, minCust, maxCust){
   this.maxCust = maxCust;
   this.totalCookies = 0;
 
-  cities.push(this);
+  cities.push(this); //<-- it will put this whole object into cities array
 }
-
+// prototype means inherit, any instance of the constructor that we creat will inherit each method     object created through this constructor will inherit methods
 CookieCity.prototype.getCust = function () {
   for(let i = 0; i < hours.length; i++){
     // this is more dynamic and can use the variable which you can be renamed
     this.cust.push(randomCust(this.minCust,this.maxCust));
   }
 },
-
+// prototype inherit method, in this case will run which is a code block. this method wil call the method above us.
 CookieCity.prototype.calcCookie = function () {
   this.getCust(); // <-- this is a method call
   for(let i = 0; i < hours.length; i++){
@@ -39,7 +39,7 @@ CookieCity.prototype.calcCookie = function () {
     this.totalCookies = this.totalCookies + cookieBatch;
   }
 };
-
+// create a variable with a new object using a the previous constructor, then the paranthesis include the new arguments to pass in the paramaters
 let seattle = new CookieCity('Seattle', 6.3, 23, 65);
 let tokyo = new CookieCity('Tokyo', 1.2, 3, 24);
 let dubai = new CookieCity('Dubai', 3.7, 11, 38);
@@ -196,12 +196,14 @@ function randomCust(min, max) {
 //        <img>
 //      </article> -->
 function createHeader(){
+
   const tableElem = document.createElement('table');
-  cookieSales.appendChild(tableElem);
+  cookieSection.appendChild(tableElem);
 
   // // // body and rows
   const tableHeadElem = document.createElement('thead');
   tableElem.appendChild(tableHeadElem);
+
   const row = document.createElement('tr');
   tableHeadElem.appendChild(row);
 
@@ -214,9 +216,9 @@ function createHeader(){
     th1Elem.textContent = hours[i];
     row.appendChild(th1Elem);
   }
-  
- 
-
+  const th3Elem = document.createElement('th');
+  th3Elem.textContent = 'Daily Total';
+  row.appendChild(th3Elem);
 }
 createHeader();
 
@@ -225,15 +227,19 @@ CookieCity.prototype.renderCookies = function() {
   // create an article element, it doesn't need context but append it to our DOM window, cookieSales
   const table = document.querySelector('table');
 
+  //********** helper function example **********
+  // function createElement(tag, parent) {
+  //   const elem = document.createElement(tag);
+  //   parent.appendChild(elem);
+  //   return elem;
+  // }
+
+  //EXAMPLE: let thElem = createElement('th', tableElem);
+
   //******** DOM TABLE RENDER ************
 
   const row1 = document.createElement('tr');
   table.appendChild(row1);
-  // for(let i = 0; i< hours.length; i++){
-  //   const th2Elem = document.createElement('td');
-  //   th2Elem.textContent = `${hours[i]}`;
-  //   row1.appendChild(th2Elem);
-  // }
   // cookieSales is our window into the DOM
 
   //create h2 element, give it context
@@ -242,25 +248,28 @@ CookieCity.prototype.renderCookies = function() {
   th4Elem.textContent = this.city;
   row1.appendChild(th4Elem);
 
-  // const pElem = document.createElement('p');
-  // pElem.textContent = '${cookie.name} is selling ${cookies.total}';
-  // // to do: create a function with total cookies??
-  // articleElem.appendChild(pElem);
-
 
   // loop through the hours array to create list
   for(let i = 0; i < hours.length; i++){
     // 6am: 16 cookies
-
-    const th3Elem = document.createElement('th');
-    th3Elem.textContent = `${this.cookieArr[i]}`;
-    row1.appendChild(th3Elem);
+    const tdElem = document.createElement('td');
+    tdElem.textContent = `${this.cookieArr[i]}`;
+    row1.appendChild(tdElem);
   }
-  const th5Elem = document.createElement('th');
-  th5Elem.textContent = `${this.totalCookies} cookies`;
-  row1.appendChild(th5Elem);
+  const td2Elem = document.createElement('td');
+  td2Elem.textContent = `${this.totalCookies} cookies`;
+  row1.appendChild(td2Elem);
 };
 
+function renderFooter(){
+  let table = document.querySelector('table');
+  const footElem = document.createElement('tfoot');
+  footElem.textContent = '';
+  table.appendChild(footElem);
+
+
+}
+renderFooter();
 // for loop through cities
 function renderAllCities() {
   for (let i = 0; i < cities.length; i++){
@@ -269,5 +278,7 @@ function renderAllCities() {
     currentCity.renderCookies();
   }
 }
+
+// I sometimes find it helpful to use 'row' and 'col' for 2D arrays, instead of 'i' and 'j'
 
 renderAllCities();
