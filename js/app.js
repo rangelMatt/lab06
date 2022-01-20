@@ -9,6 +9,8 @@ let cookieSection = document.getElementById('cookie-sales');
 // adding all my city objects to an array for easy storage and use in helper functions
 const cities = [];
 
+const cookieForm = document.getElementById('some-cookie');
+
 // console.log(cookieSection);// 'this' refers to the object that will be created.
 // this
 function CookieCity(city, avgCookie, minCust, maxCust) {
@@ -306,8 +308,26 @@ function renderAllCities() {
   }
 }
 
+function handlesubmit(event){
+  event.preventDefault();
+
+  let cityName = event.target.cityName.value;
+  let cust = event.target.cust.value;
+  let photo = event.target.photo.value;
+
+  // array
+  interests = interests.split(',');
+
+  let avgCookie = event.target.avgCookie.checked;
+
+  let currentCity = new CookieCity(cityName, avgCookie, cust, photo);
+
+  currentCity.renderCookies();
+}
 
 // I sometimes find it helpful to use 'row' and 'col' for 2D arrays, instead of 'i' and 'j'
 
 renderAllCities();
 renderFooter();
+
+cookieForm.addEventListener('submit', handleSubmit)
