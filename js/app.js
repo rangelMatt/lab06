@@ -274,12 +274,14 @@ function renderFooter() {
   th3Elem.textContent = 'Daily Total';
   row3.appendChild(th3Elem);
 
-  // let cookieTotal = 0;
+  let cookieTotal = 0;
 
   for (let i = 0; i < hours.length; i++) {
     let hourTotal = 0;
     for (let j = 0; j < cities.length; j++) {
       hourTotal += cities[j].cookieArr[i];
+      cookieTotal += hourTotal;
+      console.log(cookieTotal,'Total');
       // cookieTotal += cities[j].cookieArr[i];
     }
     // for (let i = 0; i < hours.length; i++){
