@@ -325,8 +325,6 @@ function handlesubmit(event){
   currentCity.renderCookies();
 }
 
-// I sometimes find it helpful to use 'row' and 'col' for 2D arrays, instead of 'i' and 'j'
-
 renderAllCities();
 renderFooter();
 
