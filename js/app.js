@@ -308,24 +308,24 @@ function renderAllCities() {
   }
 }
 
-function handlesubmit(event){
+function handleSubmit(event){
   event.preventDefault();
 
-  let cityName = event.target.cityName.value;
-  let cust = event.target.cust.value;
-  let photo = event.target.photo.value;
+  let city = event.target.cityName.value;
+  let avgCookie = +event.target.avgCookie.value;
+  let minCust = +event.target.minCust.value;
+  let maxCust = +event.target.maxCust.value;
 
-  // array
-  interests = interests.split(',');
+  // let age = +event.target.age.value; <--- use plus signs to have the input turn from a string to a number
+  // array; interests = interests.split(','); <- this will return an array
 
-  let avgCookie = event.target.avgCookie.checked;
+  let newCookie = new CookieCity(city, avgCookie, minCust, maxCust);
 
-  let currentCity = new CookieCity(cityName, avgCookie, cust, photo);
-
-  currentCity.renderCookies();
+  newCookie.getCust();
+  newCookie.getCust();
+  newCookie.renderCookies();
 }
 
+cookieForm.addEventListener('submit', handleSubmit);
 renderAllCities();
 renderFooter();
-
-cookieForm.addEventListener('submit', handleSubmit)
