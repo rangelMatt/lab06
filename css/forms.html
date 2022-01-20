@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <body>
+      <form id="my-form">
+        <fieldset>
+          <legend>Giving my fieldset some context</legend>
+          <!-- one way to add a input-->
+          <label for="name">Name</label>
+          <!-- use the attribute of name so you can target that specific attribute-->
+          <input id="name" type="text" name="firstName">
+          <!-- 2nd way to add a input-->
+          <label>Age
+            <input type="number" name="age">
+          </label>
+
+          <label>Fav Housewives Franchise</label>
+          <select name="housewives" id="housewives">
+            <option value="">--Please Choose--</option>
+            <option value="beverylyhills">Beverly Hills</option>
+            <option value="slc">SLC</option>
+            <option value="none">None</option>
+          </select>
+        </fieldset>
+        <!-- button NEEDS a type, and needs to go in your form at the very last part. -->
+        <button type ="submit">Submit</button>
+      </form>
+      <script src="formsApp.js"></script>
+    </body>
+  </head>
