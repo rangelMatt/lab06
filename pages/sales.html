@@ -4,10 +4,34 @@
   <title>Salmon Cookies</title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=fire">
 </head> 
   <body>
     <main>
-      <h1>Cookie Sales</h1>
+      <h1 class="font-effect-fire">Cookie Sales</h1>
+      <div>
+        <form id="some-cookie">
+          <fieldset>
+            <legend>Basic Information</legend>
+  
+            <label for="city">City for New Cookie Stand</label>
+            <input id = "city" type="text" name= "cityName">
+    
+          </fieldset>
+
+          <fieldset>
+            <legend>How Many Cookies</legend>
+            <p>Quantity set</p>
+            <label for="avgCookie">Anticipated average cookie ea. customer buys</label>
+            <input id="avgCookie" type="text" name="avgCookie">
+            <label for="minCust">Minimum customer expected</label>
+            <input id="minCust"type="text" name="minCust">
+            <label for="maxCust">Maximum customer expected</label>
+            <input id="maxCust"type="text" name="maxCust">
+          </fieldset>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
       <section id="cookie-sales"></section>
     </main>
     <footer>

@@ -9,6 +9,8 @@ let cookieSection = document.getElementById('cookie-sales');
 // adding all my city objects to an array for easy storage and use in helper functions
 const cities = [];
 
+const cookieForm = document.getElementById('some-cookie');
+
 // console.log(cookieSection);// 'this' refers to the object that will be created.
 // this
 function CookieCity(city, avgCookie, minCust, maxCust) {
@@ -73,7 +75,6 @@ let lima = new CookieCity('Lima', 4.6, 2, 16);
 // seattle.getCust();
 // seattle.calcCookie();
 
-console.log(seattle);
 
 // let tokyo = {
 //   city: 'Tokyo',
@@ -274,28 +275,23 @@ function renderFooter() {
   th3Elem.textContent = 'Daily Total';
   row3.appendChild(th3Elem);
 
-  let cookieTotal = 0;
+  //let cookieTotal = 0;
 
   for (let i = 0; i < hours.length; i++) {
     let hourTotal = 0;
     for (let j = 0; j < cities.length; j++) {
       hourTotal += cities[j].cookieArr[i];
-      cookieTotal += hourTotal;
-      console.log(cookieTotal,'Total');
+      // cookieTotal += hourTotal;
       // cookieTotal += cities[j].cookieArr[i];
     }
-    // for (let i = 0; i < hours.length; i++){
-    //
-    //     const td3Elem = document.createElement('td');
-    //   td3Elem.textContent = this.cookieArr[j][i];
-    //   row3.appendChild(td3Elem);
-    //     cookieTotal +=
-    console.log(hourTotal);
+
     const td3Elem = document.createElement('td');
     td3Elem.textContent = hourTotal;
     row3.appendChild(td3Elem);
   }
+
 }
+
 
 // for loop through cities
 function renderAllCities() {
@@ -306,8 +302,32 @@ function renderAllCities() {
   }
 }
 
+function handleSubmit(event){
+  event.preventDefault();
 
-// I sometimes find it helpful to use 'row' and 'col' for 2D arrays, instead of 'i' and 'j'
+  let city = event.target.cityName.value;
+  let avgCookie = +event.target.avgCookie.value;
+  let minCust = +event.target.minCust.value;
+  let maxCust = +event.target.maxCust.value;
+
+  // let age = +event.target.age.value; <--- use plus signs to have the input turn from a string to a number
+  // array; interests = interests.split(','); <- this will return an array
+
+  let newCookie = new CookieCity(city, avgCookie, minCust, maxCust);
+
+  newCookie.getCust();
+  newCookie.calcCookie();
+  newCookie.renderCookies();
+
+  let tfoot = document.querySelector('tfoot');
+
+  tfoot.remove();
+  renderFooter();
+
+  cookieForm.reset();
+}
+
+cookieForm.addEventListener('submit', handleSubmit);
 
 renderAllCities();
 renderFooter();
