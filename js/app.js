@@ -218,7 +218,7 @@ function createHeader() {
     row.appendChild(th1Elem);
   }
   const th3Elem = document.createElement('th');
-  th3Elem.textContent = 'Daily Total';
+  th3Elem.textContent = 'Daily Total Cookies';
   row.appendChild(th3Elem);
 }
 createHeader();
@@ -258,7 +258,7 @@ CookieCity.prototype.renderCookies = function () {
     row1.appendChild(tdElem);
   }
   const td2Elem = document.createElement('td');
-  td2Elem.textContent = `${this.totalCookies} cookies`;
+  td2Elem.textContent = `${this.totalCookies}`;
   row1.appendChild(td2Elem);
 };
 // ******* FOOOTER START *******
@@ -272,23 +272,27 @@ function renderFooter() {
   footElem.appendChild(row3);
 
   const th3Elem = document.createElement('th');
-  th3Elem.textContent = 'Daily Total';
+  th3Elem.textContent = 'Hourly Total Cookies';
   row3.appendChild(th3Elem);
 
-  //let cookieTotal = 0;
+  let cookieTotal = 0;
 
   for (let i = 0; i < hours.length; i++) {
     let hourTotal = 0;
     for (let j = 0; j < cities.length; j++) {
       hourTotal += cities[j].cookieArr[i];
-      // cookieTotal += hourTotal;
-      // cookieTotal += cities[j].cookieArr[i];
+
+      cookieTotal += cities[j].cookieArr[i];
     }
 
     const td3Elem = document.createElement('td');
     td3Elem.textContent = hourTotal;
     row3.appendChild(td3Elem);
+
   }
+  const td4Elem = document.createElement('td');
+  td4Elem.textContent = `${cookieTotal}`;
+  row3.appendChild(td4Elem);
 
 }
 
